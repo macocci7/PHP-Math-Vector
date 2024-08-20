@@ -499,4 +499,71 @@ final class Vector2dTest extends TestCase
     {
         $this->assertSame($expected, $vector->terminalPoint());
     }
+
+    public static function provide_rotate_can_return_rotated_vector_correctly(): array
+    {
+        return [
+            [
+                'vector' => new Vector2d([0, 0], [1, 0]),
+                'degrees' => 0.0,
+                'expected' => new Vector2d([0, 0], [1, 0]),
+            ],
+            [
+                'vector' => new Vector2d([0, 0], [1, 0]),
+                'degrees' => 45.0,
+                'expected' => new Vector2d([0, 0], [cos(deg2rad(45.0)), sin(deg2rad(45.0))]),
+            ],
+            [
+                'vector' => new Vector2d([0, 0], [1, 0]),
+                'degrees' => 90.0,
+                'expected' => new Vector2d([0, 0], [cos(deg2rad(90.0)), sin(deg2rad(90.0))]),
+            ],
+            [
+                'vector' => new Vector2d([0, 0], [1, 0]),
+                'degrees' => 135.0,
+                'expected' => new Vector2d([0, 0], [cos(deg2rad(135.0)), sin(deg2rad(135.0))]),
+            ],
+            [
+                'vector' => new Vector2d([0, 0], [1, 0]),
+                'degrees' => 180.0,
+                'expected' => new Vector2d([0, 0], [cos(deg2rad(180.0)), sin(deg2rad(180.0))]),
+            ],
+            [
+                'vector' => new Vector2d([0, 0], [1, 0]),
+                'degrees' => 225.0,
+                'expected' => new Vector2d([0, 0], [cos(deg2rad(225.0)), sin(deg2rad(225.0))]),
+            ],
+            [
+                'vector' => new Vector2d([0, 0], [1, 0]),
+                'degrees' => 270.0,
+                'expected' => new Vector2d([0, 0], [cos(deg2rad(270.0)), sin(deg2rad(270.0))]),
+            ],
+            [
+                'vector' => new Vector2d([0, 0], [1, 0]),
+                'degrees' => 315.0,
+                'expected' => new Vector2d([0, 0], [cos(deg2rad(315.0)), sin(deg2rad(315.0))]),
+            ],
+            [
+                'vector' => new Vector2d([0, 0], [1, 0]),
+                'degrees' => 360.0,
+                'expected' => new Vector2d([0, 0], [cos(deg2rad(360.0)), sin(deg2rad(360.0))]),
+            ],
+            [
+                'vector' => new Vector2d([1, 2], [3, 4]),
+                'degrees' => 0.0,
+                'expected' => new Vector2d([1, 2], [3, 4]),
+            ],
+            [
+                'vector' => new Vector2d([1, 2], [4, 3]),
+                'degrees' => 90.0,
+                'expected' => new Vector2d([1, 2], [5 * cos(acos(4 / 5) + M_PI / 2), 5 * sin(acos(4 / 5) + M_PI / 2)]),
+            ],
+        ];
+    }
+
+    #[DataProvider('provide_rotate_can_return_rotated_vector_correctly')]
+    public function test_rotate_can_return_rotated_vector_correctly(Vector2d $vector, float $degrees, Vector2d $expected): void
+    {
+        $this->assertEquals($expected, $vector->rotate($degrees));
+    }
 }

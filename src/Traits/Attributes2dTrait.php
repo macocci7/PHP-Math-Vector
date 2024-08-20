@@ -94,4 +94,23 @@ trait Attributes2dTrait
             ],
         );
     }
+
+    /**
+     * rotates the vector counterclockwise around the initital point
+     *
+     * @param   float   $degrees
+     * @return  Vector2d
+     */
+    public function rotate(float $degrees)
+    {
+        $length = $this->magnitude();
+        $angle = $this->degrees();
+        return new Vector2d(
+            $this->initialPoint(),
+            [
+                $length * cos(deg2rad($angle + $degrees)),
+                $length * sin(deg2rad($angle + $degrees)),
+            ],
+        );
+    }
 }

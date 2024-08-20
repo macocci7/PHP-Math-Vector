@@ -207,10 +207,22 @@ echo "degrees:" . $a->degrees() . PHP_EOL;
 echo "radian:" . $a->radian() . PHP_EOL;
 ```
 
+#### 5.1.12. Rotation
+
+To get a rotated vector, use `rotate()` method.
+
+Pass degrees to rotate as an argument.
+
+```php
+$a = new Vector2d([1, 2], [3, 4]);
+$b = $a->rotate(90.0);
+```
+
 ## 6. Examples
 
 - [UsingVector2d.php](examples/UsingVector2d.php)
 - [ApplicationVector2d.php](examples/ApplicationVector2d.php)
+- [RotateVector2d.php](examples/RotateVector2d.php)
 
 ## 7. LICENSE
 
