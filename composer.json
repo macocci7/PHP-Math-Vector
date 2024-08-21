@@ -1,6 +1,6 @@
 {
     "name": "macocci7/php-math-vector",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Math library of vector",
     "type": "library",
     "license": "MIT",
