@@ -3,8 +3,9 @@
 namespace Macocci7\PhpMathVector\Traits;
 
 use Macocci7\PhpMathVector\Vector2d;
+use Macocci7\PhpMathVector\Vector3d;
 
-trait Attributes2dTrait
+trait Attributes3dTrait
 {
     /**
      * returns the initial point
@@ -23,11 +24,12 @@ trait Attributes2dTrait
      */
     public function terminalPoint()
     {
-        [$x1, $y1] = $this->initialPoint;
-        [$x2, $y2] = $this->components();
+        [$x1, $y1, $z1] = $this->initialPoint;
+        [$x2, $y2, $z2] = $this->components();
         return [
             $x1 + $x2,
             $y1 + $y2,
+            $z1 + $z2,
         ];
     }
 
@@ -48,7 +50,11 @@ trait Attributes2dTrait
      */
     public function magnitude()
     {
-        return sqrt($this->components[0] ** 2 + $this->components[1] ** 2);
+        return sqrt(
+            $this->components[0] ** 2
+            + $this->components[1] ** 2
+            + $this->components[2] ** 2
+        );
     }
 
     /**
@@ -65,7 +71,7 @@ trait Attributes2dTrait
     /**
      * returns the unit vector
      *
-     * @return  Vector2d|null
+     * @return  Vector3d|null
      */
     public function unitVector()
     {
@@ -73,10 +79,10 @@ trait Attributes2dTrait
         if ($magnitude == 0) {
             return null;
         }
-        [$x, $y] = $this->components();
-        return new Vector2d(
+        [$x, $y, $z] = $this->components();
+        return new Vector3d(
             $this->initialPoint,
-            [$x / $magnitude, $y / $magnitude],
+            [$x / $magnitude, $y / $magnitude, $z / $magnitude],
         );
     }
 
@@ -84,35 +90,17 @@ trait Attributes2dTrait
      * returns a new vector that is this vector multiplied by k.
      *
      * @param   int|float   $k
-     * @return  Vector2d
+     * @return  Vector3d
      */
     public function multiply(int|float $k)
     {
-        [$x, $y] = $this->components();
-        return new Vector2d(
+        [$x, $y, $z] = $this->components();
+        return new Vector3d(
             $this->initialPoint,
             [
                 $x * $k,
                 $y * $k,
-            ],
-        );
-    }
-
-    /**
-     * rotates the vector counterclockwise around the initital point
-     *
-     * @param   float   $degrees
-     * @return  Vector2d
-     */
-    public function rotate(float $degrees)
-    {
-        $length = $this->magnitude();
-        $angle = $this->degrees();
-        return new Vector2d(
-            $this->initialPoint(),
-            [
-                $length * cos(deg2rad($angle + $degrees)),
-                $length * sin(deg2rad($angle + $degrees)),
+                $z * $k,
             ],
         );
     }

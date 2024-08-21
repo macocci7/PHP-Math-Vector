@@ -60,6 +60,7 @@ final class Vector2dTest extends TestCase
     public static function provide_unitVector_can_return_unit_vector_correctly(): array
     {
         return [
+            ['vector' => new Vector2d([1, 2], [0, 0]), 'expected' => null],
             ['vector' => new Vector2d([1, 2], [3, 4]), 'expected' => new Vector2d([1, 2], [0.6, 0.8])],
             ['vector' => new Vector2d([1, 2], [sqrt(2) / 2, sqrt(2) / 2]), 'expected' => new Vector2d([1, 2], [sqrt(2) / 2, sqrt(2) / 2])],
             ['vector' => new Vector2d([1, 2], [3, 0]), 'expected' => new Vector2d([1, 2], [1, 0])],
@@ -68,7 +69,7 @@ final class Vector2dTest extends TestCase
     }
 
     #[DataProvider('provide_unitVector_can_return_unit_vector_correctly')]
-    public function test_unitVector_can_return_unit_vector_correctly(Vector2d $vector, Vector2d $expected): void
+    public function test_unitVector_can_return_unit_vector_correctly(Vector2d $vector, Vector2d|null $expected): void
     {
         $this->assertEquals($expected, $vector->unitVector());
     }
