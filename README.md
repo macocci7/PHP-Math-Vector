@@ -418,4 +418,4 @@ This method returns a new vector, and the both original vectors remain in their 
 
 ***
 
-Copyright 2024 macocci7.
+Copyright 2024 - 2025 macocci7.
